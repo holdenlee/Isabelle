@@ -1,0 +1,87 @@
+%
+\begin{isabellebody}%
+\def\isabellecontext{FunctionLemmas}%
+%
+\isamarkupheader{Basic lemmas about functions%
+}
+\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ FunctionLemmas\isanewline
+\isanewline
+\isakeyword{imports}\ Main\isanewline
+\ \ {\isachardoublequoteopen}{\isachartilde}{\isachartilde}{\isacharslash}src{\isacharslash}HOL{\isacharslash}Library{\isacharslash}FuncSet{\isachardoublequoteclose}\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+These are used in simplification. Note that the difference from Pi-mem is that the statement
+about the function comes first, so Isabelle can more easily figure out what $S$ is.%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ PiE{\isacharunderscore}mem{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}f\ {\isasymin}\ S{\isasymrightarrow}\isactrlsub E\ T\ {\isasymLongrightarrow}\ x\ {\isasymin}\ S\ {\isasymLongrightarrow}\ f\ x\ {\isasymin}\ T{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ PiE{\isacharunderscore}def\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isacommand{lemma}\isamarkupfalse%
+\ Pi{\isacharunderscore}mem{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}f\ {\isasymin}\ S{\isasymrightarrow}\ T\ {\isasymLongrightarrow}\ x\ {\isasymin}\ S\ {\isasymLongrightarrow}\ f\ x\ {\isasymin}\ T{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ Pi{\isacharunderscore}def\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\end{isabellebody}%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "root"
+%%% End:

@@ -1,0 +1,368 @@
+%
+\begin{isabellebody}%
+\def\isabellecontext{MonoidSums}%
+%
+\isamarkupheader{Sums in monoids%
+}
+\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ MonoidSums\isanewline
+\isanewline
+\isakeyword{imports}\ Main\isanewline
+\ \ {\isachardoublequoteopen}{\isachartilde}{\isachartilde}{\isacharslash}src{\isacharslash}HOL{\isacharslash}Algebra{\isacharslash}Module{\isachardoublequoteclose}\isanewline
+\ \ RingModuleFacts\isanewline
+\ \ FunctionLemmas\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+We build on the finite product simplifications in FiniteProduct.thy and the analogous ones
+for finite sums (see "lemmas" in Ring.thy).%
+\end{isamarkuptext}%
+\isamarkuptrue%
+%
+\begin{isamarkuptext}%
+Use as an intro rule%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ comm{\isacharunderscore}monoid{\isacharparenright}\ factors{\isacharunderscore}equal{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}{\isasymlbrakk}a{\isacharequal}b{\isacharsemicolon}\ c{\isacharequal}d{\isasymrbrakk}\ {\isasymLongrightarrow}\ a{\isasymotimes}\isactrlbsub G\isactrlesub c\ {\isacharequal}\ \ b{\isasymotimes}\isactrlbsub G\isactrlesub d{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ comm{\isacharunderscore}monoid{\isacharparenright}\ extend{\isacharunderscore}prod{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ a\ A\ S\isanewline
+\ \ \isakeyword{assumes}\ fin{\isacharcolon}\ {\isachardoublequoteopen}finite\ S{\isachardoublequoteclose}\ \isakeyword{and}\ subset{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymsubseteq}S{\isachardoublequoteclose}\ \isakeyword{and}\ a{\isacharcolon}\ {\isachardoublequoteopen}a{\isasymin}A{\isasymrightarrow}carrier\ G{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymOtimes}\isactrlbsub G\isactrlesub \ x{\isasymin}S{\isachardot}\ {\isacharparenleft}if\ x{\isasymin}A\ then\ a\ x\ else\ {\isasymone}\isactrlbsub G\isactrlesub {\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymOtimes}\isactrlbsub G\isactrlesub \ x{\isasymin}A{\isachardot}\ a\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharparenleft}\isakeyword{is}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymOtimes}\isactrlbsub G\isactrlesub \ x{\isasymin}S{\isachardot}\ {\isacharquery}b\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymOtimes}\isactrlbsub G\isactrlesub \ x{\isasymin}A{\isachardot}\ a\ x{\isacharparenright}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ subset\ \isacommand{have}\isamarkupfalse%
+\ uni{\isacharcolon}{\isachardoublequoteopen}S\ {\isacharequal}\ A\ {\isasymunion}\ {\isacharparenleft}S{\isacharminus}A{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ assms\ subset\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}subst\ uni{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}subst\ finprod{\isacharunderscore}Un{\isacharunderscore}disjoint{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ cong{\isacharcolon}\ finprod{\isacharunderscore}cong\ if{\isacharunderscore}cong\ elim{\isacharcolon}\ finite{\isacharunderscore}subset\ simp\ add{\isacharcolon}Pi{\isacharunderscore}def\ finite{\isacharunderscore}subset{\isacharparenright}\isanewline
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Scalar multiplication distributes over scalar multiplication (on left).%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ finsum{\isacharunderscore}smult{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharbrackleft}{\isacharbar}\ finite\ A{\isacharsemicolon}\ c{\isasymin}\ carrier\ R{\isacharsemicolon}\ g\ {\isasymin}\ A\ {\isacharminus}{\isachargreater}\ carrier\ M\ {\isacharbar}{\isacharbrackright}\ {\isacharequal}{\isacharequal}{\isachargreater}\isanewline
+\ \ \ {\isacharparenleft}c\ {\isasymodot}\isactrlbsub M\isactrlesub \ finsum\ M\ g\ A{\isacharparenright}\ {\isacharequal}\ finsum\ M\ {\isacharparenleft}{\isacharpercent}x{\isachardot}\ c\ {\isasymodot}\isactrlbsub M\isactrlesub \ g\ x{\isacharparenright}\ A\ {\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ set{\isacharcolon}\ finite{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ empty\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isacharbackquoteopen}c{\isasymin}carrier\ R{\isacharbackquoteclose}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}insert\ a\ A{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ insert{\isachardot}hyps\ insert{\isachardot}prems\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}finsum\ M\ g\ {\isacharparenleft}insert\ a\ A{\isacharparenright}\ {\isacharequal}\ g\ a\ {\isasymoplus}\isactrlbsub M\isactrlesub \ finsum\ M\ g\ A{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ finsum{\isacharunderscore}insert{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ insert{\isachardot}hyps\ insert{\isachardot}prems\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymOplus}\isactrlbsub M\isactrlesub x{\isasymin}insert\ a\ A{\isachardot}\ c\ {\isasymodot}\isactrlbsub M\isactrlesub \ g\ x{\isacharparenright}\ {\isacharequal}\ c\ {\isasymodot}\isactrlbsub M\isactrlesub \ g\ a\ {\isasymoplus}\isactrlbsub M\isactrlesub {\isacharparenleft}{\isasymOplus}\isactrlbsub M\isactrlesub x{\isasymin}A{\isachardot}\ c\ {\isasymodot}\isactrlbsub M\isactrlesub \ g\ x{\isacharparenright}{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ finsum{\isacharunderscore}insert{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ insert{\isachardot}hyps\ insert{\isachardot}prems\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}{\isadigit{1}}\ {\isadigit{2}}\ smult{\isacharunderscore}r{\isacharunderscore}distr\ finsum{\isacharunderscore}closed{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Scalar multiplication distributes over scalar multiplication (on right).%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ finsum{\isacharunderscore}smult{\isacharunderscore}r{\isacharcolon}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharbrackleft}{\isacharbar}\ finite\ A{\isacharsemicolon}\ v{\isasymin}\ carrier\ M{\isacharsemicolon}\ f\ {\isasymin}\ A\ {\isacharminus}{\isachargreater}\ carrier\ R\ {\isacharbar}{\isacharbrackright}\ {\isacharequal}{\isacharequal}{\isachargreater}\isanewline
+\ \ \ {\isacharparenleft}finsum\ R\ f\ A\ {\isasymodot}\isactrlbsub M\isactrlesub \ v{\isacharparenright}\ {\isacharequal}\ finsum\ M\ {\isacharparenleft}{\isacharpercent}x{\isachardot}\ f\ x\ {\isasymodot}\isactrlbsub M\isactrlesub \ v{\isacharparenright}\ A\ {\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induct\ set{\isacharcolon}\ finite{\isacharparenright}\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ empty\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isacharbackquoteopen}v{\isasymin}carrier\ M{\isacharbackquoteclose}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}insert\ a\ A{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ insert{\isachardot}hyps\ insert{\isachardot}prems\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}finsum\ R\ f\ {\isacharparenleft}insert\ a\ A{\isacharparenright}\ {\isacharequal}\ f\ a\ {\isasymoplus}\isactrlbsub R\isactrlesub \ finsum\ R\ f\ A{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ R{\isachardot}finsum{\isacharunderscore}insert{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ insert{\isachardot}hyps\ insert{\isachardot}prems\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymOplus}\isactrlbsub M\isactrlesub x{\isasymin}insert\ a\ A{\isachardot}\ f\ x\ {\isasymodot}\isactrlbsub M\isactrlesub \ v{\isacharparenright}\ {\isacharequal}\ f\ a\ {\isasymodot}\isactrlbsub M\isactrlesub \ v\ {\isasymoplus}\isactrlbsub M\isactrlesub {\isacharparenleft}{\isasymOplus}\isactrlbsub M\isactrlesub x{\isasymin}A{\isachardot}\ f\ x\ {\isasymodot}\isactrlbsub M\isactrlesub \ v{\isacharparenright}{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ finsum{\isacharunderscore}insert{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ insert{\isachardot}hyps\ insert{\isachardot}prems\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}{\isadigit{1}}\ {\isadigit{2}}\ smult{\isacharunderscore}l{\isacharunderscore}distr\ finsum{\isacharunderscore}closed{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+A sequence of lemmas that shows that the product does not depend on the ambient group. 
+Note I had to dig back into the definitions of foldSet to show this.%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ foldSet{\isacharunderscore}not{\isacharunderscore}depend{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ A\ E\ \isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}D{\isasymsubseteq}E{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}foldSetD\ D\ f\ e\ {\isasymsubseteq}foldSetD\ E\ f\ e{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymAnd}x{\isadigit{1}}\ x{\isadigit{2}}{\isachardot}\ {\isacharparenleft}x{\isadigit{1}}{\isacharcomma}x{\isadigit{2}}{\isacharparenright}\ {\isasymin}\ foldSetD\ D\ f\ e\ {\isasymLongrightarrow}\ {\isacharparenleft}x{\isadigit{1}}{\isacharcomma}\ x{\isadigit{2}}{\isacharparenright}\ {\isasymin}\ foldSetD\ E\ f\ e{\isachardoublequoteclose}\ \isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ x{\isadigit{1}}\ x{\isadigit{2}}\ \isanewline
+\ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}x{\isadigit{1}}{\isacharcomma}x{\isadigit{2}}{\isacharparenright}\ {\isasymin}\ foldSetD\ D\ f\ e{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ {\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}thesis\ x{\isadigit{1}}\ x{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}intro\ foldSetD{\isachardot}induct{\isacharbrackleft}\isakeyword{where}\ {\isacharquery}D{\isacharequal}{\isachardoublequoteopen}D{\isachardoublequoteclose}\ \isakeyword{and}\ {\isacharquery}f{\isacharequal}{\isachardoublequoteopen}f{\isachardoublequoteclose}\ \isakeyword{and}\ {\isacharquery}e{\isacharequal}{\isachardoublequoteopen}e{\isachardoublequoteclose}\ \isakeyword{and}\ {\isacharquery}x{\isadigit{1}}{\isachardot}{\isadigit{0}}{\isacharequal}{\isachardoublequoteopen}x{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{and}\ {\isacharquery}x{\isadigit{2}}{\isachardot}{\isadigit{0}}{\isacharequal}{\isachardoublequoteopen}x{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isakeyword{and}\ {\isacharquery}P\ {\isacharequal}\ {\isachardoublequoteopen}{\isasymlambda}x{\isadigit{1}}\ x{\isadigit{2}}{\isachardot}\ {\isacharparenleft}{\isacharparenleft}x{\isadigit{1}}{\isacharcomma}\ x{\isadigit{2}}{\isacharparenright}{\isasymin}\ foldSetD\ E\ f\ e{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}{\isacharparenright}\ \isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}intro\ emptyI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ insertI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\ \isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ foldD{\isacharunderscore}not{\isacharunderscore}depend{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ D\ E\ B\ f\ e\ A\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}LCD\ B\ D\ f{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}LCD\ B\ E\ f{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}D{\isasymsubseteq}E{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{4}}{\isacharcolon}\ {\isachardoublequoteopen}e{\isasymin}D{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{5}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymsubseteq}B{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{6}}{\isacharcolon}\ {\isachardoublequoteopen}finite\ B{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}foldD\ D\ f\ e\ A\ {\isacharequal}\ foldD\ E\ f\ e\ A{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ assms\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymexists}y{\isachardot}\ {\isacharparenleft}A{\isacharcomma}y{\isacharparenright}{\isasymin}foldSetD\ D\ f\ e{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}intro\ finite{\isacharunderscore}imp{\isacharunderscore}foldSetD{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}metis\ finite{\isacharunderscore}subset{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ LCD{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}\ \isacommand{obtain}\isamarkupfalse%
+\ y\ \isakeyword{where}\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}A{\isacharcomma}y{\isacharparenright}{\isasymin}foldSetD\ D\ f\ e{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ assms\ {\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}foldD\ D\ f\ e\ A\ {\isacharequal}\ y{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ LCD{\isachardot}foldD{\isacharunderscore}equality{\isacharbrackleft}of\ B{\isacharbrackright}{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{3}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{4}}{\isacharcolon}\ {\isachardoublequoteopen}foldSetD\ D\ f\ e\ {\isasymsubseteq}\ foldSetD\ E\ f\ e{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ foldSet{\isacharunderscore}not{\isacharunderscore}depend{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{2}}\ {\isadigit{4}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{5}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}A{\isacharcomma}y{\isacharparenright}{\isasymin}foldSetD\ E\ f\ e{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ assms\ {\isadigit{5}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{6}}{\isacharcolon}\ {\isachardoublequoteopen}foldD\ E\ f\ e\ A\ {\isacharequal}\ y{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}intro\ LCD{\isachardot}foldD{\isacharunderscore}equality{\isacharbrackleft}of\ B{\isacharbrackright}{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{3}}\ {\isadigit{6}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ comm{\isacharunderscore}monoid{\isacharparenright}\ finprod{\isacharunderscore}all{\isadigit{1}}{\isacharbrackleft}simp{\isacharbrackright}{\isacharcolon}\isanewline
+\ \ \isakeyword{assumes}\ fin{\isacharcolon}\ {\isachardoublequoteopen}finite\ A{\isachardoublequoteclose}\ \isakeyword{and}\ all{\isadigit{1}}{\isacharcolon}{\isachardoublequoteopen}\ {\isasymAnd}a{\isachardot}\ a{\isasymin}A{\isasymLongrightarrow}f\ a\ {\isacharequal}\ {\isasymone}\isactrlbsub G\isactrlesub {\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymOtimes}\isactrlbsub G\isactrlesub \ a{\isasymin}A{\isachardot}\ f\ a{\isacharparenright}\ {\isacharequal}\ {\isasymone}\isactrlbsub G\isactrlesub {\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ assms\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ cong{\isacharcolon}\ finprod{\isacharunderscore}cong{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{context}\isamarkupfalse%
+\ abelian{\isacharunderscore}monoid\isanewline
+\isakeyword{begin}\isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ summands{\isacharunderscore}equal\ {\isacharequal}\ add{\isachardot}factors{\isacharunderscore}equal\isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ extend{\isacharunderscore}sum\ {\isacharequal}\ add{\isachardot}extend{\isacharunderscore}prod\isanewline
+\isacommand{lemmas}\isamarkupfalse%
+\ finsum{\isacharunderscore}all{\isadigit{0}}\ {\isacharequal}\ add{\isachardot}finprod{\isacharunderscore}all{\isadigit{1}}\isanewline
+\isacommand{end}\isamarkupfalse%
+\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\end{isabellebody}%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "root"
+%%% End:

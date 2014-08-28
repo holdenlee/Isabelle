@@ -1,0 +1,599 @@
+%
+\begin{isabellebody}%
+\def\isabellecontext{SumSpaces}%
+%
+\isamarkupheader{The direct sum of modules.%
+}
+\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ SumSpaces\isanewline
+\isakeyword{imports}\ Main\isanewline
+\ \ {\isachardoublequoteopen}{\isachartilde}{\isachartilde}{\isacharslash}src{\isacharslash}HOL{\isacharslash}Algebra{\isacharslash}Module{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}{\isachartilde}{\isachartilde}{\isacharslash}src{\isacharslash}HOL{\isacharslash}Algebra{\isacharslash}Coset{\isachardoublequoteclose}\isanewline
+\ \ RingModuleFacts\isanewline
+\ \ MonoidSums\isanewline
+\ \ FunctionLemmas\isanewline
+\ \ LinearCombinations\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+We define the direct sum $M_1\oplus M_2$ of 2 vector spaces as the set $M_1\times M_2$ under
+componentwise addition and scalar multiplication.%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{definition}\isamarkupfalse%
+\ direct{\isacharunderscore}sum{\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharprime}a{\isacharcomma}{\isacharprime}b{\isacharcomma}\ {\isacharprime}d{\isacharparenright}\ module{\isacharunderscore}scheme\ {\isasymRightarrow}\ {\isacharparenleft}{\isacharprime}a{\isacharcomma}\ {\isacharprime}c{\isacharcomma}\ {\isacharprime}e{\isacharparenright}\ module{\isacharunderscore}scheme\ {\isasymRightarrow}{\isacharparenleft}{\isacharprime}a{\isacharcomma}\ {\isacharparenleft}{\isacharprime}b{\isasymtimes}{\isacharprime}c{\isacharparenright}{\isacharparenright}\ module{\isachardoublequoteclose}\ \isanewline
+\ \ \isakeyword{where}\ \ {\isachardoublequoteopen}direct{\isacharunderscore}sum\ M{\isadigit{1}}\ M{\isadigit{2}}\ {\isacharequal}\ {\isasymlparr}carrier\ {\isacharequal}\ carrier\ M{\isadigit{1}}\ {\isasymtimes}\ carrier\ M{\isadigit{2}}{\isacharcomma}\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mult\ {\isacharequal}\ {\isacharparenleft}{\isasymlambda}\ v\ w{\isachardot}\ {\isacharparenleft}{\isasymzero}\isactrlbsub M{\isadigit{1}}\isactrlesub {\isacharcomma}\ {\isasymzero}\isactrlbsub M{\isadigit{2}}\isactrlesub {\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ one\ {\isacharequal}\ \ {\isacharparenleft}{\isasymzero}\isactrlbsub M{\isadigit{1}}\isactrlesub {\isacharcomma}\ {\isasymzero}\isactrlbsub M{\isadigit{2}}\isactrlesub {\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ zero\ {\isacharequal}\ {\isacharparenleft}{\isasymzero}\isactrlbsub M{\isadigit{1}}\isactrlesub {\isacharcomma}\ {\isasymzero}\isactrlbsub M{\isadigit{2}}\isactrlesub {\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ add\ {\isacharequal}\ {\isacharparenleft}{\isasymlambda}\ v\ w{\isachardot}\ {\isacharparenleft}fst\ v\ {\isasymoplus}\isactrlbsub M{\isadigit{1}}\isactrlesub \ fst\ w{\isacharcomma}\ snd\ v\ {\isasymoplus}\isactrlbsub M{\isadigit{2}}\isactrlesub \ snd\ w{\isacharparenright}{\isacharparenright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ smult\ {\isacharequal}\ {\isacharparenleft}{\isasymlambda}\ c\ v{\isachardot}\ {\isacharparenleft}c\ {\isasymodot}\isactrlbsub M{\isadigit{1}}\isactrlesub \ fst\ v{\isacharcomma}\ c\ {\isasymodot}\isactrlbsub M{\isadigit{2}}\isactrlesub \ snd\ v{\isacharparenright}{\isacharparenright}{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ direct{\isacharunderscore}sum{\isacharunderscore}is{\isacharunderscore}module{\isacharcolon}\ \isanewline
+\ \ \isakeyword{fixes}\ R\ M{\isadigit{1}}\ M{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}module\ R\ {\isacharparenleft}direct{\isacharunderscore}sum\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}cring\ R{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ module{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{interpret}\isamarkupfalse%
+\ v{\isadigit{1}}{\isacharcolon}\ module\ R\ M{\isadigit{1}}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ \isacommand{interpret}\isamarkupfalse%
+\ v{\isadigit{2}}{\isacharcolon}\ module\ R\ M{\isadigit{2}}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}abelian{\isacharunderscore}group\ {\isacharparenleft}direct{\isacharunderscore}sum\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}intro\ abelian{\isacharunderscore}groupI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ direct{\isacharunderscore}sum{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}\ v{\isadigit{1}}{\isachardot}a{\isacharunderscore}ac\ v{\isadigit{2}}{\isachardot}a{\isacharunderscore}ac{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ assms\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}module{\isacharunderscore}axioms\ R\ {\isacharparenleft}direct{\isacharunderscore}sum\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ module{\isacharunderscore}axioms{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ direct{\isacharunderscore}sum{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}\ v{\isadigit{1}}{\isachardot}smult{\isacharunderscore}l{\isacharunderscore}distr\ v{\isadigit{2}}{\isachardot}smult{\isacharunderscore}l{\isacharunderscore}distr\ v{\isadigit{1}}{\isachardot}smult{\isacharunderscore}r{\isacharunderscore}distr\ v{\isadigit{2}}{\isachardot}smult{\isacharunderscore}r{\isacharunderscore}distr\isanewline
+\ \ \ \ \ \ v{\isadigit{1}}{\isachardot}smult{\isacharunderscore}assoc{\isadigit{1}}\ v{\isadigit{2}}{\isachardot}smult{\isacharunderscore}assoc{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}\ {\isadigit{2}}\ {\isadigit{3}}\ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ module{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ inj{\isadigit{1}}{\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharprime}a{\isacharcomma}{\isacharprime}b{\isacharparenright}\ module\ {\isasymRightarrow}\ {\isacharparenleft}{\isacharprime}a{\isacharcomma}\ {\isacharprime}c{\isacharparenright}\ module\ {\isasymRightarrow}{\isacharparenleft}{\isacharprime}b{\isasymRightarrow}{\isacharparenleft}{\isacharprime}b{\isasymtimes}{\isacharprime}c{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{where}\ {\isachardoublequoteopen}inj{\isadigit{1}}\ M{\isadigit{1}}\ M{\isadigit{2}}\ {\isacharequal}\ {\isacharparenleft}{\isasymlambda}v{\isachardot}\ {\isacharparenleft}v{\isacharcomma}\ {\isasymzero}\isactrlbsub M{\isadigit{2}}\isactrlesub {\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ inj{\isadigit{2}}{\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharprime}a{\isacharcomma}{\isacharprime}b{\isacharparenright}\ module\ {\isasymRightarrow}\ {\isacharparenleft}{\isacharprime}a{\isacharcomma}\ {\isacharprime}c{\isacharparenright}\ module\ {\isasymRightarrow}{\isacharparenleft}{\isacharprime}c{\isasymRightarrow}{\isacharparenleft}{\isacharprime}b{\isasymtimes}{\isacharprime}c{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{where}\ {\isachardoublequoteopen}inj{\isadigit{2}}\ M{\isadigit{1}}\ M{\isadigit{2}}\ {\isacharequal}\ {\isacharparenleft}{\isasymlambda}v{\isachardot}\ {\isacharparenleft}{\isasymzero}\isactrlbsub M{\isadigit{1}}\isactrlesub {\isacharcomma}\ v{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ inj{\isadigit{1}}{\isacharunderscore}hom{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ R\ M{\isadigit{1}}\ M{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}mod{\isacharunderscore}hom\ R\ M{\isadigit{1}}\ {\isacharparenleft}direct{\isacharunderscore}sum\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}\ {\isacharparenleft}inj{\isadigit{1}}\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{interpret}\isamarkupfalse%
+\ v{\isadigit{1}}{\isacharcolon}module\ R\ M{\isadigit{1}}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ \isacommand{interpret}\isamarkupfalse%
+\ v{\isadigit{2}}{\isacharcolon}module\ R\ M{\isadigit{2}}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ mod{\isacharunderscore}hom{\isacharunderscore}def\ module{\isacharunderscore}hom{\isacharunderscore}def\ mod{\isacharunderscore}hom{\isacharunderscore}axioms{\isacharunderscore}def\ inj{\isadigit{1}}{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ direct{\isacharunderscore}sum{\isacharunderscore}is{\isacharunderscore}module{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ direct{\isacharunderscore}sum{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ inj{\isadigit{2}}{\isacharunderscore}hom{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ R\ M{\isadigit{1}}\ M{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}mod{\isacharunderscore}hom\ R\ M{\isadigit{2}}\ {\isacharparenleft}direct{\isacharunderscore}sum\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}\ {\isacharparenleft}inj{\isadigit{2}}\ M{\isadigit{1}}\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{interpret}\isamarkupfalse%
+\ v{\isadigit{1}}{\isacharcolon}module\ R\ M{\isadigit{1}}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ \isacommand{interpret}\isamarkupfalse%
+\ v{\isadigit{2}}{\isacharcolon}module\ R\ M{\isadigit{2}}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ mod{\isacharunderscore}hom{\isacharunderscore}def\ module{\isacharunderscore}hom{\isacharunderscore}def\ mod{\isacharunderscore}hom{\isacharunderscore}axioms{\isacharunderscore}def\ inj{\isadigit{2}}{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ direct{\isacharunderscore}sum{\isacharunderscore}is{\isacharunderscore}module{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ direct{\isacharunderscore}sum{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+For submodules $M_1,M_2\subseteq M$, the map $M_1\oplus M_2\to M$ given by $(m_1,m_2)\mapsto 
+m_1+m_2$ is linear.%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ sum{\isacharunderscore}map{\isacharunderscore}hom{\isacharcolon}\ \isanewline
+\ \ \isakeyword{fixes}\ M{\isadigit{1}}\ M{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ M{\isadigit{1}}\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ M{\isadigit{2}}\ M{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}mod{\isacharunderscore}hom\ R\ {\isacharparenleft}direct{\isacharunderscore}sum\ {\isacharparenleft}md\ M{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}md\ M{\isadigit{2}}{\isacharparenright}{\isacharparenright}\ M\ {\isacharparenleft}{\isasymlambda}\ v{\isachardot}\ {\isacharparenleft}fst\ v{\isacharparenright}\ {\isasymoplus}\isactrlbsub M\isactrlesub \ {\isacharparenleft}snd\ v{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{0}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ M{\isachardoublequoteclose}\isacommand{{\isachardot}{\isachardot}}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ {\isacharparenleft}md\ M{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ submodule{\isacharunderscore}is{\isacharunderscore}module{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}module\ R\ {\isacharparenleft}md\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ submodule{\isacharunderscore}is{\isacharunderscore}module{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ \isacommand{interpret}\isamarkupfalse%
+\ w{\isadigit{1}}{\isacharcolon}\ module\ R\ {\isachardoublequoteopen}{\isacharparenleft}md\ M{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ submodule{\isacharunderscore}is{\isacharunderscore}module{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ \isacommand{interpret}\isamarkupfalse%
+\ w{\isadigit{2}}{\isacharcolon}\ module\ R\ {\isachardoublequoteopen}{\isacharparenleft}md\ M{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ submodule{\isacharunderscore}is{\isacharunderscore}module{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{0}}\ h{\isadigit{1}}\ h{\isadigit{2}}\ {\isadigit{1}}\ {\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ mod{\isacharunderscore}hom{\isacharunderscore}def\ mod{\isacharunderscore}hom{\isacharunderscore}axioms{\isacharunderscore}def\ module{\isacharunderscore}hom{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule\ direct{\isacharunderscore}sum{\isacharunderscore}is{\isacharunderscore}module{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ direct{\isacharunderscore}sum{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}\ a{\isacharunderscore}ac\ smult{\isacharunderscore}r{\isacharunderscore}distr\ ring{\isacharunderscore}subset{\isacharunderscore}carrier{\isacharparenright}\ \isanewline
+\ \ \ \ \ \ \isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ sum{\isacharunderscore}is{\isacharunderscore}submodule{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ N{\isadigit{1}}\ N{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{1}}\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{2}}\ M{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}submodule\ R\ {\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isacharparenright}\ M{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{interpret}\isamarkupfalse%
+\ l{\isacharcolon}\ mod{\isacharunderscore}hom\ R\ {\isachardoublequoteopen}{\isacharparenleft}direct{\isacharunderscore}sum\ {\isacharparenleft}md\ N{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}md\ N{\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\ M\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymlambda}\ v{\isachardot}\ {\isacharparenleft}fst\ v{\isacharparenright}\ {\isasymoplus}\isactrlbsub M\isactrlesub \ {\isacharparenleft}snd\ v{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ sum{\isacharunderscore}map{\isacharunderscore}hom{\isacharparenright}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}l{\isachardot}im\ {\isacharequal}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ l{\isachardot}im{\isacharunderscore}def\ submodule{\isacharunderscore}sum{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ direct{\isacharunderscore}sum{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ image{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ {\isacharparenleft}l{\isachardot}im{\isacharparenright}\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ l{\isachardot}im{\isacharunderscore}is{\isacharunderscore}submodule{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}\ {\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ in{\isacharunderscore}sum{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ N{\isadigit{1}}\ N{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{1}}\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{2}}\ M{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}N{\isadigit{1}}\ {\isasymsubseteq}\ submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}sum{\isacharunderscore}def\ image{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rename{\isacharunderscore}tac\ v{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}v{\isachardoublequoteclose}\ \isakeyword{in}\ bexI{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isasymzero}\isactrlbsub M\isactrlesub {\isachardoublequoteclose}\ \isakeyword{in}\ bexI{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ msum{\isacharunderscore}comm{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ N{\isadigit{1}}\ N{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{1}}\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{2}}\ M{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}{\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{2}}\ N{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}sum{\isacharunderscore}def\ image{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}rename{\isacharunderscore}tac\ v\ w{\isacharparenright}\isanewline
+\ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}full{\isacharunderscore}types{\isacharparenright}\ M{\isachardot}add{\isachardot}m{\isacharunderscore}comm\ subsetD{\isacharparenright}{\isacharplus}\isanewline
+\ \ \ \ \isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+If $M_1,M_2\subseteq M$ are submodules, then $M_1+M_2$ is the minimal subspace such that 
+both $M_1\subseteq M$ and $M_2\subseteq M$.%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ sum{\isacharunderscore}is{\isacharunderscore}minimal{\isacharcolon}\isanewline
+\ \ \isakeyword{fixes}\ N\ N{\isadigit{1}}\ N{\isadigit{2}}\isanewline
+\ \ \isakeyword{assumes}\ h{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{1}}\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N{\isadigit{2}}\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ N\ M{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}{\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isacharparenright}\ {\isasymsubseteq}\ N\ {\isasymlongleftrightarrow}\ N{\isadigit{1}}\ {\isasymsubseteq}\ N\ {\isasymand}\ N{\isadigit{2}}\ {\isasymsubseteq}\ N{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isacharparenright}\ {\isasymsubseteq}\ N\ {\isasymLongrightarrow}\ N{\isadigit{1}}\ {\isasymsubseteq}\ N\ {\isasymand}\ N{\isadigit{2}}\ {\isasymsubseteq}\ N{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{0}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isacharparenright}\ {\isasymsubseteq}\ N{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}N{\isadigit{1}}{\isasymsubseteq}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ in{\isacharunderscore}sum{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ h{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}N{\isadigit{2}}{\isasymsubseteq}submodule{\isacharunderscore}sum\ N{\isadigit{2}}\ N{\isadigit{1}}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ in{\isacharunderscore}sum{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{2}}\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}N{\isadigit{2}}{\isasymsubseteq}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ msum{\isacharunderscore}comm{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{0}}\ {\isadigit{1}}{\isadigit{1}}\ {\isadigit{1}}{\isadigit{3}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}N{\isadigit{1}}\ {\isasymsubseteq}\ N\ {\isasymand}\ N{\isadigit{2}}\ {\isasymsubseteq}\ N\ {\isasymLongrightarrow}\ {\isacharparenleft}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isacharparenright}\ {\isasymsubseteq}\ N{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{9}}{\isacharcolon}\ {\isachardoublequoteopen}N{\isadigit{1}}\ {\isasymsubseteq}\ N\ {\isasymand}\ N{\isadigit{2}}\ {\isasymsubseteq}\ N{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{{\isacharbraceleft}}\isamarkupfalse%
+\ \ \isanewline
+\ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ v\isanewline
+\ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isadigit{2}}{\isadigit{0}}{\isacharcolon}\ {\isachardoublequoteopen}v{\isasymin}submodule{\isacharunderscore}sum\ N{\isadigit{1}}\ N{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{2}}{\isadigit{0}}\ \isacommand{obtain}\isamarkupfalse%
+\ w{\isadigit{1}}\ w{\isadigit{2}}\ \isakeyword{where}\ {\isadigit{2}}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}w{\isadigit{1}}{\isasymin}N{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{and}\ {\isadigit{2}}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}w{\isadigit{2}}{\isasymin}N{\isadigit{2}}{\isachardoublequoteclose}\ \isakeyword{and}\ {\isadigit{2}}{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}v{\isacharequal}w{\isadigit{1}}{\isasymoplus}\isactrlbsub M\isactrlesub \ w{\isadigit{2}}{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}sum{\isacharunderscore}def\ image{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{9}}\ {\isadigit{2}}{\isadigit{1}}\ {\isadigit{2}}{\isadigit{2}}\ {\isadigit{2}}{\isadigit{3}}\ h{\isadigit{3}}\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}v\ {\isasymin}\ N{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \ \ \isacommand{apply}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}poly{\isacharunderscore}guards{\isacharunderscore}query{\isacharparenright}\ \ contra{\isacharunderscore}subsetD{\isacharparenright}\isanewline
+\ \isanewline
+\ \ \ \ \isacommand{{\isacharbraceright}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ subset{\isacharunderscore}iff{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{1}}\ {\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ metis\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+$\text{span} A\cup B = \text{span} A + \text{span} B$%
+\end{isamarkuptext}%
+\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ {\isacharparenleft}\isakeyword{in}\ module{\isacharparenright}\ span{\isacharunderscore}union{\isacharunderscore}is{\isacharunderscore}sum{\isacharcolon}\ \isanewline
+\ \ \isakeyword{fixes}\ A\ B\isanewline
+\ \ \isakeyword{assumes}\ \ h{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymsubseteq}carrier\ M{\isachardoublequoteclose}\ \isakeyword{and}\ h{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}B{\isasymsubseteq}carrier\ M{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}span\ {\isacharparenleft}A{\isasymunion}\ B{\isacharparenright}\ {\isacharequal}\ submodule{\isacharunderscore}sum\ {\isacharparenleft}span\ A{\isacharparenright}\ {\isacharparenleft}span\ B{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}AplusB{\isacharequal}{\isachardoublequoteopen}submodule{\isacharunderscore}sum\ {\isacharparenleft}span\ A{\isacharparenright}\ {\isacharparenleft}span\ B{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ \ h{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ s{\isadigit{0}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ {\isacharparenleft}span\ A{\isacharparenright}\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ span{\isacharunderscore}is{\isacharunderscore}submodule{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ \ h{\isadigit{3}}\ \isacommand{have}\isamarkupfalse%
+\ s{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ {\isacharparenleft}span\ B{\isacharparenright}\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ span{\isacharunderscore}is{\isacharunderscore}submodule{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ s{\isadigit{0}}\ \isacommand{have}\isamarkupfalse%
+\ s{\isadigit{0}}{\isacharunderscore}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}span\ A{\isacharparenright}{\isasymsubseteq}carrier\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ s{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ s{\isadigit{1}}{\isacharunderscore}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}span\ B{\isacharparenright}{\isasymsubseteq}carrier\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}unfold\ submodule{\isacharunderscore}def{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ h{\isadigit{2}}\ h{\isadigit{3}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymunion}B{\isasymsubseteq}carrier\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ \ {\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ {\isacharparenleft}span\ {\isacharparenleft}A{\isasymunion}B{\isacharparenright}{\isacharparenright}\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ span{\isacharunderscore}is{\isacharunderscore}submodule{\isacharparenright}\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ s{\isadigit{0}}\ s{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}submodule\ R\ {\isacharquery}AplusB\ M{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ sum{\isacharunderscore}is{\isacharunderscore}submodule{\isacharparenright}\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ c{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}span\ {\isacharparenleft}A{\isasymunion}B{\isacharparenright}\ {\isasymsubseteq}\ {\isacharquery}AplusB{\isachardoublequoteclose}\isanewline
+\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ \ h{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ a{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymsubseteq}span\ A{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ in{\isacharunderscore}own{\isacharunderscore}span{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ s{\isadigit{0}}\ s{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ a{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}span\ A\ {\isasymsubseteq}\ {\isacharquery}AplusB{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ in{\isacharunderscore}sum{\isacharparenright}\ \isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ a{\isadigit{1}}\ a{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ a{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymsubseteq}\ {\isacharquery}AplusB{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ \ h{\isadigit{3}}\ \isacommand{have}\isamarkupfalse%
+\ b{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}B{\isasymsubseteq}span\ B{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ in{\isacharunderscore}own{\isacharunderscore}span{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ s{\isadigit{1}}\ s{\isadigit{0}}\ \isacommand{have}\isamarkupfalse%
+\ b{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}span\ B\ {\isasymsubseteq}\ {\isacharquery}AplusB{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ in{\isacharunderscore}sum\ msum{\isacharunderscore}comm{\isacharparenright}\ \isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ b{\isadigit{1}}\ b{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ b{\isadigit{3}}{\isacharcolon}\ {\isachardoublequoteopen}B{\isasymsubseteq}\ {\isacharquery}AplusB{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ a{\isadigit{3}}\ b{\isadigit{3}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{5}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymunion}B{\isasymsubseteq}\ {\isacharquery}AplusB{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ {\isadigit{5}}\ {\isadigit{3}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ span{\isacharunderscore}is{\isacharunderscore}subset{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{have}\isamarkupfalse%
+\ c{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharquery}AplusB\ {\isasymsubseteq}\ span\ {\isacharparenleft}A{\isasymunion}B{\isacharparenright}{\isachardoublequoteclose}\ \isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharminus}\ \isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}A{\isasymsubseteq}A{\isasymunion}B{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}B{\isasymsubseteq}A{\isasymunion}B{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ \ {\isadigit{1}}{\isadigit{1}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isadigit{1}}{\isacharcolon}{\isachardoublequoteopen}span\ A\ {\isasymsubseteq}span\ {\isacharparenleft}A{\isasymunion}B{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ span{\isacharunderscore}is{\isacharunderscore}monotone{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ \ {\isadigit{1}}{\isadigit{2}}\ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isadigit{2}}{\isacharcolon}{\isachardoublequoteopen}span\ B\ {\isasymsubseteq}span\ {\isacharparenleft}A{\isasymunion}B{\isacharparenright}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule\ span{\isacharunderscore}is{\isacharunderscore}monotone{\isacharparenright}\isanewline
+\ \ \ \ \isacommand{from}\isamarkupfalse%
+\ s{\isadigit{0}}\ s{\isadigit{1}}\ {\isadigit{2}}\ {\isadigit{2}}{\isadigit{1}}\ {\isadigit{2}}{\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}\ sum{\isacharunderscore}is{\isacharunderscore}minimal{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{from}\isamarkupfalse%
+\ c{\isadigit{1}}\ c{\isadigit{2}}\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\end{isabellebody}%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "root"
+%%% End:
